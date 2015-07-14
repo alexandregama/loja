@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.alura.loja.dao.CarrinhoDAO;
+import br.com.alura.loja.dao.CarrinhoDao;
 import br.com.alura.loja.modelo.Carrinho;
 
 @Path("carrinhos")
@@ -15,7 +15,7 @@ public class CarrinhoResource {
 	@Produces(MediaType.APPLICATION_XML)
 	public String busca() {
 		System.out.println("Retornando os carrinhos via GET");
-		Carrinho carrinho = new CarrinhoDAO().busca(1L);
+		Carrinho carrinho = new CarrinhoDao().busca(1L);
 		
 		return carrinho.toXml();
 	}
