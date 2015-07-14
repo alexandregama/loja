@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import br.com.alura.loja.modelo.Carrinho;
 import br.com.alura.loja.modelo.Produto;
 
-public class CarrinhoDao {
+public class HashMapCarrinhoDao implements Carrinhos {
 	
 	private static Map<Long, Carrinho> banco = new HashMap<Long, Carrinho>();
 	private static AtomicLong contador = new AtomicLong(1);
@@ -23,16 +23,19 @@ public class CarrinhoDao {
 		banco.put(1l, carrinho);
 	}
 	
+	@Override
 	public void adiciona(Carrinho carrinho) {
 		long id = contador.incrementAndGet();
 		carrinho.setId(id);
 		banco.put(id, carrinho);
 	}
 	
+	@Override
 	public Carrinho busca(Long id) {
 		return banco.get(id);
 	}
 	
+	@Override
 	public Carrinho remove(long id) {
 		return banco.remove(id);
 	}
