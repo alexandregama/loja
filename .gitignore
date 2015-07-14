@@ -1,7 +1,7 @@
 build/
 bin/
 target/
-.class
+*.class
 .classpath
 .project
 .settings/

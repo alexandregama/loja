@@ -51,7 +51,7 @@ public class GrizzlyServer {
 		public void start() {
 			URI completeUri;
 			try {
-				completeUri = new URI(uri + ":" + port + "/");
+				completeUri = new URI("http://" +  uri + ":" + port + "/");
 				ResourceConfig config = new ResourceConfig().packages(packageName);
 				HttpServer server = GrizzlyHttpServerFactory.createHttpServer(completeUri , config);
 				System.out.println("Servidor rodando");
