@@ -12,7 +12,7 @@ public class HashMapProjetoDao implements Projetos {
 	private static AtomicLong contador = new AtomicLong(3);
 	
 	static {
-		banco.put(1L, new Projeto(1, "Casa do Código", 2014));
+		banco.put(1L, new Projeto(1, "Casa do Codigo", 2014));
 		banco.put(2L, new Projeto(2, "Alura", 2013));
 		banco.put(3L, new Projeto(2, "Caelum", 2002));
 	}
