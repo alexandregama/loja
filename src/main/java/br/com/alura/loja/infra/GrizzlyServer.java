@@ -42,23 +42,23 @@ public class GrizzlyServer {
 
 		private String port;
 		private String packageName;
+		private HttpServer server;
 
 		public GrizzlyServerStarter(String port, String packageName) {
 			this.port = port;
 			this.packageName = packageName;
 		}
 
-		public void start() {
+		public HttpServer start() {
 			URI completeUri;
 			try {
 				completeUri = new URI("http://" +  uri + ":" + port + "/");
 				ResourceConfig config = new ResourceConfig().packages(packageName);
-				HttpServer server = GrizzlyHttpServerFactory.createHttpServer(completeUri , config);
+				server = GrizzlyHttpServerFactory.createHttpServer(completeUri , config);
 				System.out.println("Servidor rodando");
 				try {
-					System.in.read();
-					server.stop();
-				} catch (IOException e) {
+					return server;
+				} catch (Exception e) {
 					throw new RuntimeException("Ocorreu um erro ao startar o Server do Grizzly", e);
 				}
 			} catch (URISyntaxException e) {
