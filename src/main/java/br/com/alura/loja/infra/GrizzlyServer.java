@@ -48,7 +48,7 @@ public class GrizzlyServer {
 			this.packageName = packageName;
 		}
 
-		public HttpServer start() {
+		public HttpServer getServer() {
 			URI completeUri;
 			try {
 				completeUri = new URI("http://" +  uri + ":" + port + "/");

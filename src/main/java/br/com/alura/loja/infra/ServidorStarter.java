@@ -7,7 +7,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 public class ServidorStarter {
 
 	public static void main(String[] args) {
-		HttpServer server = GrizzlyServer.onUri("localhost").onPort("8080").enablingPackage("br.com.alura.loja").start();
+		HttpServer server = GrizzlyServer.onUri("localhost").onPort("8080").enablingPackage("br.com.alura.loja").getServer();
 		
 		try {
 			server.start();
