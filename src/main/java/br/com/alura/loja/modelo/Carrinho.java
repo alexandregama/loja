@@ -1,6 +1,7 @@
 package br.com.alura.loja.modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,11 +10,19 @@ import com.thoughtworks.xstream.XStream;
 
 public class Carrinho {
 
-	private List<Produto> produtos = new ArrayList<Produto>();
+	private final List<Produto> produtos = new ArrayList<Produto>();
 	private String rua;
 	@SuppressWarnings("unused")
 	private String cidade;
 	private long id;
+
+	public Carrinho(String rua, String cidade) {
+		this.rua = rua;
+		this.cidade = cidade;
+	}
+
+	public Carrinho() {
+	}
 
 	public Carrinho adiciona(Produto produto) {
 		produtos.add(produto);
@@ -71,7 +80,7 @@ public class Carrinho {
 	}
 	
 	public List<Produto> getProdutos() {
-		return produtos;
+		return Collections.unmodifiableList(produtos);
 	}
 
 	public String toXml() {
