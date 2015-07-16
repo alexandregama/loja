@@ -14,6 +14,7 @@ import org.junit.Test;
 import br.com.alura.loja.infra.GrizzlyServer;
 import br.com.alura.loja.modelo.Projeto;
 
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
 public class ProjetoResourceTest {
@@ -50,6 +51,17 @@ public class ProjetoResourceTest {
 		String conteudo = target.path("/projetos/1").request().get(String.class);
 		
 		Projeto projeto = (Projeto) new XStream().fromXML(conteudo);
+		
+		assertEquals("Casa do Codigo", projeto.getNome());
+	}
+	
+	@Test
+	public void deveriaRetornarOProdutoComOsDadosEsperadosUsandoPathParamRetornandoJson() throws Exception {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target(LOCALHOST_URI);
+		String conteudo = target.path("/projetos/1/json").request().get(String.class);
+		
+		Projeto projeto = new Gson().fromJson(conteudo, Projeto.class);
 		
 		assertEquals("Casa do Codigo", projeto.getNome());
 	}

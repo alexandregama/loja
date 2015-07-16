@@ -34,4 +34,15 @@ public class CarrinhoResource {
 		return carrinho.toXml();
 	}
 	
+	@GET
+	@Path("{id}/json")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String pesquisaJson(@PathParam("id") Long id) {
+		Carrinhos carrinhos = new HashMapCarrinhoDao();
+		
+		Carrinho carrinho = carrinhos.busca(id);
+		
+		return carrinho.toJson();
+	}
+	
 }
