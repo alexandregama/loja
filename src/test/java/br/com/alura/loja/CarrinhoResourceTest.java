@@ -62,7 +62,7 @@ public class CarrinhoResourceTest {
 		WebTarget target = client.target(LOCALHOST_URI);
 		String conteudo = target.path("/carrinhos/1/json").request().get(String.class);
 		
-		Carrinho carrinho = (Carrinho) new Gson().fromJson(conteudo, Carrinho.class);
+		Carrinho carrinho = new Gson().fromJson(conteudo, Carrinho.class);
 		
 		assertEquals("Rua Vergueiro 3185, 8 andar", carrinho.getRua());
 	}
