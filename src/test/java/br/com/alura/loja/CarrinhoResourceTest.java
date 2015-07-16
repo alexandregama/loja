@@ -1,6 +1,6 @@
 package br.com.alura.loja;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -38,6 +38,17 @@ public class CarrinhoResourceTest {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(LOCALHOST_URI);
 		String conteudo = target.path("/carrinhos").queryParam("id", 1).request().get(String.class);
+		
+		Carrinho carrinho = (Carrinho) new XStream().fromXML(conteudo);
+		
+		assertEquals("Rua Vergueiro 3185, 8 andar", carrinho.getRua());
+	}
+	
+	@Test
+	public void deveriaRetornarOCarrinhoComOsDadosEsperadosUsandoPathParam() throws Exception {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target(LOCALHOST_URI);
+		String conteudo = target.path("/carrinhos/1").request().get(String.class);
 		
 		Carrinho carrinho = (Carrinho) new XStream().fromXML(conteudo);
 		
