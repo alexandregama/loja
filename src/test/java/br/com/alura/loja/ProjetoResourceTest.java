@@ -1,6 +1,6 @@
 package br.com.alura.loja;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -33,14 +33,24 @@ public class ProjetoResourceTest {
 	}
 
 	@Test
-	public void deveriaRetornarOProdutoComOsDadosEsperados() throws Exception {
+	public void deveriaRetornarOProdutoComOsDadosEsperadosUsandoQueryParam() throws Exception {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(LOCALHOST_URI);
-		String conteudo = target.path("/projetos").request().get(String.class);
+		String conteudo = target.path("/projetos").queryParam("id", 1).request().get(String.class);
 		
 		Projeto projeto = (Projeto) new XStream().fromXML(conteudo);
 		
 		assertEquals("Casa do Codigo", projeto.getNome());
 	}
 	
+	@Test
+	public void deveriaRetornarOProdutoComOsDadosEsperadosUsandoPathParam() throws Exception {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target(LOCALHOST_URI);
+		String conteudo = target.path("/projetos/1").request().get(String.class);
+		
+		Projeto projeto = (Projeto) new XStream().fromXML(conteudo);
+		
+		assertEquals("Casa do Codigo", projeto.getNome());
+	}
 }
