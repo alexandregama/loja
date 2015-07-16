@@ -1,6 +1,5 @@
 package br.com.alura.loja.infra;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -49,13 +48,12 @@ public class GrizzlyServer {
 			this.packageName = packageName;
 		}
 
-		public HttpServer start() {
+		public HttpServer getServer() {
 			URI completeUri;
 			try {
 				completeUri = new URI("http://" +  uri + ":" + port + "/");
 				ResourceConfig config = new ResourceConfig().packages(packageName);
 				server = GrizzlyHttpServerFactory.createHttpServer(completeUri , config);
-				System.out.println("Servidor rodando");
 				try {
 					return server;
 				} catch (Exception e) {
