@@ -14,6 +14,7 @@ import org.junit.Test;
 import br.com.alura.loja.infra.GrizzlyServer;
 import br.com.alura.loja.modelo.Carrinho;
 
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
 public class CarrinhoResourceTest {
@@ -51,6 +52,17 @@ public class CarrinhoResourceTest {
 		String conteudo = target.path("/carrinhos/1").request().get(String.class);
 		
 		Carrinho carrinho = (Carrinho) new XStream().fromXML(conteudo);
+		
+		assertEquals("Rua Vergueiro 3185, 8 andar", carrinho.getRua());
+	}
+	
+	@Test
+	public void deveriaRetornarOCarrinhoComOsDadosEsperadosUsandoPathParamERetornandoJson() throws Exception {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target(LOCALHOST_URI);
+		String conteudo = target.path("/carrinhos/1/json").request().get(String.class);
+		
+		Carrinho carrinho = (Carrinho) new Gson().fromJson(conteudo, Carrinho.class);
 		
 		assertEquals("Rua Vergueiro 3185, 8 andar", carrinho.getRua());
 	}
